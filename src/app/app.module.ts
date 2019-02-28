@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ErrorInterceptorProvider } from 'src/interceptors/error-interceptors';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
     StatusBar,
     SplashScreen,
     CategoriaService,
+    ErrorInterceptorProvider,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
