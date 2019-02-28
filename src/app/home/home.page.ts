@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { CategoriaService } from './../../services/domain/categoria.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -16,7 +17,7 @@ export class HomePage {
     senha: ""
   };
 
-  constructor(public router: Router, public menu: MenuController){
+  constructor(public router: Router, public menu: MenuController,public auth: AuthService){
 
   }
   
@@ -29,8 +30,12 @@ export class HomePage {
 
 
   login( ){
-    console.log(this.creds)
-    this.router.navigateByUrl('categorias') 
-  }
+    this.auth.authenticate(this.creds)
+      .subscribe(response =>{
+        console.log(response.headers.get('Authorization'));
+        this.router.navigateByUrl('categorias') 
+      },
+      error => {});
 
+  }
 }
