@@ -1,3 +1,4 @@
+import { CategoriaService } from './../../services/domain/categoria.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
@@ -9,17 +10,18 @@ import { MenuController } from '@ionic/angular';
 })
 export class HomePage {
 
+  
 
   constructor(public router: Router, public menu: MenuController){
 
   }
-
-  ionViewWillEnter() {
-    this.menu.swipeEnable(false);
-    }
-    ionViewDidLeave() {
-    this.menu.swipeEnable(true);
-    }
+  
+  ngOnInit() {
+    this.menu.enable(false);
+  }
+  ionViewDidLeave() {
+    this.menu.enable(true);
+  }
 
 
   login( ){
