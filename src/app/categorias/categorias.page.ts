@@ -1,3 +1,5 @@
+import { API_CONFIG } from './../../config/api.config';
+import { CategoriaDTO } from './../../models/categoria.dto';
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from 'src/services/domain/categoria.service';
 
@@ -8,12 +10,15 @@ import { CategoriaService } from 'src/services/domain/categoria.service';
 })
 export class CategoriasPage implements OnInit {
 
+  items: CategoriaDTO[];
+  backetUrl: string = API_CONFIG.backetBaseUrl;
+
   constructor(public categoriaService: CategoriaService) { }
 
   ngOnInit() {
     this.categoriaService.findAll()
       .subscribe(response =>{
-        console.log(response);
+        this.items = response;
       },
       error =>{
         console.log(error);
