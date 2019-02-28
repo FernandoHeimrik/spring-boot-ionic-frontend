@@ -5,11 +5,11 @@
 <form action="">
   <ion-item>
     <ion-label position="floating">Email</ion-label>
-    <ion-input type="Email"></ion-input> 
+    <ion-input [(ngModel)]="creds.email" name="email" type="Email"></ion-input> 
   </ion-item>
   <ion-item>
       <ion-label position="floating">Senha</ion-label>
-      <ion-input type="password"></ion-input> 
+      <ion-input [(ngModel)]="creds.senha" name="senha" type="password" ></ion-input> 
     </ion-item>
   <ion-button expand="full" (click)="login()"> Login</ion-button>
   <ion-button expand="full" fill="outline"> Registrar</ion-button>
