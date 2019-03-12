@@ -33,7 +33,7 @@ export class HomePage {
     this.auth.authenticate(this.creds)
       .subscribe(response =>{
         this.auth.successfulLogin(response.headers.get('Authorization'));
-        this.router.navigateByUrl('categorias') 
+        this.router.navigate(['/categorias']) 
       },
       error => {});
 

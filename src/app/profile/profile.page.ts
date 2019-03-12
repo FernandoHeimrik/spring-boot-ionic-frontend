@@ -4,6 +4,7 @@ import { StorageService } from 'src/services/storage.service';
 import { LocalUser } from './../../models/local_user';
 import { Component, OnInit } from '@angular/core';
 import { ClienteDTO } from 'src/models/cliente.dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,8 @@ export class ProfilePage implements OnInit {
 
   constructor(
     public storage: StorageService,
-    public clienteService : ClienteService
+    public clienteService : ClienteService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -28,7 +30,14 @@ export class ProfilePage implements OnInit {
           this.cliente = response;
           this.getImageIfExist();
         },
-        error => {})
+        error => {
+          if(error.status == 403){
+            this.router.navigate(['/home']);
+          }
+        })
+    }
+    else{
+      this.router.navigate(['/home']);
     }
   }
 
