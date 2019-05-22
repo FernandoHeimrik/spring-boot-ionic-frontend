@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AuthService } from 'src/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,12 +22,18 @@ export class AppComponent {
       url: '/categorias',
       icon: 'list-box'
     },
+    {
+      title: 'Logout',
+      url: '',
+    }
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public router: Router,
+    public auth: AuthService
   ) {
     this.initializeApp();
   }
@@ -35,5 +43,18 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  openPage(appPages : {title:string, component:string}) {
+
+    switch (appPages.title) {
+      case 'Logout':
+      this.auth.logout();
+      this.router.navigate(['/home']) 
+      break;
+
+      default:
+      this.router.navigate(this.appPages);
+    }
   }
 }
